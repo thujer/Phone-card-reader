@@ -1,0 +1,177 @@
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+</head>
+
+<body background="../images/thunder.gif" text="#FFFFFF" bgcolor="#000000">
+<p align="center"><font size="5" color="#FFFFFF"><u><b>TELEFONNÍ KARTY</b></u></font>
+<p><font face="IMPACT CE,IMPACT" size="+2">Určitě</font> je znáte všichni.
+Setkáváte se s nimi dnes a denně a to ať už v podobě klasických telefonních
+nebo GSM-SIM aktivačních karet. A právě o těch prvních bude dnes řeč.</p>
+<p>Kolik z vás už asi napadlo, jestli by tu malou plastovou kartičku o rozměrech
+85.6x54x0.76mm nešlo nějak &quot;oblbnout&quot; a volat tak zadarmo.
+Teoreticky by to neměl být problém, prakticky to problém je. Proč to se
+dozvíte dále.
+<p>Předtím, než se podíváme na telefonní karty blíže, podívejme se
+trochu na historii a použití čipových karet. V polovině 80. let se objevila
+nová generace čipových a &quot;smart-card&quot; karet (čipy do těch úplně
+prvních vynalezl v roce 1974 Roland Moreno). Zatímco ty první byly a jsou
+hloupé (a budou?), ty druhé mívají u sebe mikroprocesor nebo podobnou hračku,
+čili poskytují vyšší úrověň zabezpečení. Tyto karty nahradili některé
+magnetické kreditní karty a začali se používat ve veřejných telefonních
+automatech k platbě místo mincí. S kartami, které mají mikroprocesor jste
+se mohli setkat u bankomatů, šifrovacích karet pro kabelové TV-dekodéry (třeba
+německá Premiere), dále pak v podobě zdravotních karet (hlavně Anglie) a
+dnes nejčastěji v mobilních telefonech GSM. Rozsah použití těchto karet je
+velmi široký. I ty nejhloupější karty bez mikroprocesoru se dají použít
+třeba jako hardwarový klíč ke dveřím, auto-alarmu, ochraně dat v počítači
+(sestrojíte čtečku, napíšete program a pokud karta nemá správné sériové
+číslo &quot;Hastala Vista Baby&quot;)
+<p>Čipové karty se řídí normou ISO 7816. To se týká především fyzikálních
+vlastností a odolnosti proti mechnickým a elektromagnetickým vlivům
+(7816-1). Velikosti karty a umístění čipu je popsáno v části 7816-2. Konečně
+se dostáváme k části 7816-3, která popisuje komunikační protokoly. Ty se
+mohou podle druhu použití od normy velmi lišit (záleží také na výrobci).
+Ale zpět k hlavnímu tématu dnešního článku: Jaký je zádrhel v doplnění
+nových jednotek na kartu? Nebo udělat z 50jednotkové karty 150jednotkovou!!!
+Zádrhelů je několik. Pro doplnění nových jednotek by bylo potřeba čip (čipy
+v tel. kartách jsou 256bitové sériové EPROM, vyráběné technologií NMOS)
+vymazat UV zářením. Proti tomuto způsobu vymazání je však čip chráněn
+pryskyřicí, která nepropouští UV záření. Pokud by vám toto povedlo pořád
+nemáte vyhráno. Jak je patrné z přiložené tabulky, smazalo by se i prvních
+96bitů, kde jsou uloženy výrobní údaje. Tato oblast je ale chráněna
+pojistkou (vývod 8 - FUSE), která je přepálena po prvním naprogramování u
+výrobce. Nové naprogramování použité karty je tedy nemožné, co takhle
+sestavit emulátor! Myšlenka pěkná, v praxi proveditelná (zvládl by to každý
+kdo umí pájet a nakupovat součástky), ale v automatu nefunkční. Ten si
+totiž otestuje i fyzikální vlastnosti karty a uznejte - podaří se vám
+napodobit originál? Těžko. I přesto není k zahození vědet, jak využít
+prázdnou kartu doma.
+<p>Stejný typ karet jako u nás se používá ve Švédsku, Finsku, Norsku,
+Portugalsku atd. Obdobné typy používající se např. v Německu nebo na
+Slovensku mají 128bitové EEPROM vyráběné technologií CMOS, složitější
+kódování jednotek a trochu jiné vývody. V USA zase některé telefonní
+společnosti využívají principu centrální evidence používaní karet, což
+téměř znemožní zneužití, protže na kartě je pouze číslo karty a odkaz
+na počítač, který pro ni vede evidenci.<center>
+<table border="3">
+  <tbody>
+    <tr>
+      <td>0..7&nbsp;</td>
+      <td>kontrolní součet</td>
+    </tr>
+    <tr>
+      <td>8..19&nbsp;</td>
+      <td>831h pro telefonní karty&nbsp;</td>
+    </tr>
+    <tr>
+      <td>20..31</td>
+      <td>počet jednotek na nové&nbsp;<br>
+        kartě v BCD kódu</td>
+    </tr>
+    <tr>
+      <td>32..40&nbsp;</td>
+      <td>kód výrobce, 00h Shlumberger,&nbsp;<br>
+        40h Gemplus</td>
+    </tr>
+    <tr>
+      <td>41..79</td>
+      <td>sériové číslo</td>
+    </tr>
+    <tr>
+      <td>80..87</td>
+      <td>11h&nbsp;</td>
+    </tr>
+    <tr>
+      <td>88..95</td>
+      <td>kód země, 55h Česká republika</td>
+    </tr>
+    <tr>
+      <td>96..255</td>
+      <td>bitové pole, každé použité&nbsp;<br>
+        jednotce odpovídá zapsaný bit</td>
+    </tr>
+  </tbody>
+</table>
+</center>Nyní se podívejme co vlastně je na kartě. Normálně má nejvyšší
+hodnotu bit 1, zde je to však naopak - nejdůležitější je bit 0. Představte
+si situaci: přijdete k automatu, vložíte kartu (automat si kartu &quot;přečte&quot;,
+vytočíte číslo a co se děje dál? Poté, co volaný zvedne telefon, automat
+na kartu zapíše 1 (do části 96...255 bitů - tzv. bitové pole). Tím se na
+kartě odečte jednotka, ale aby to nebylo tak jednoduché, automat si kartu
+znovu &quot;přečte&quot; a porovná s předchozím čtením. Pokud na kartě přibyl
+zapsaný bit, vše je v pořádku a vy voláte, pokud ne, automat přeruší
+spojení. Zde je možno použít malý fígl. Pokud volaný používá záznamník,
+nevíte jestli je doma a chtece ušetřit jednotku, stačí přelepit POUZE vývod
+6 (Vpp - vstup pro zápis). Poté kartu vložit do automatu, vytočit a počkat
+na zvednutí. A zde nastane ta pravá sranda. Pokud volaný vezme, víte, že je
+doma, kartu uvedete do původního stavu a zavoláte znovu. Pokud zvedne záznamník
+ušetřili jste jednotku na kartě!<center>
+<table border="3">
+  <tbody>
+    <tr>
+      <td>Vývod</td>
+      <td>Význam</td>
+      <td>Funkce</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Vcc = 5V</td>
+      <td>napájení</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>R_/W</td>
+      <td>vstup</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Clock</td>
+      <td>vstup</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>RESET_</td>
+      <td>vstup</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>GND = 5V</td>
+      <td>napájení</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Vpp</td>
+      <td>vstup</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Out</td>
+      <td>výstup</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Fuse</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</center><center>* význam _ je roven negaci!</center>
+<p>A co domácí využití karet? pokud máte vyvolanou kartu, stačí načíst
+její obsah, ten někam uložit a po spuštění programu požádat o vložení
+karty. Pokud bude vložena nesprávná karta je na vás co se stane. Bitové
+pole (bity 96...255) můžete libovolně upravovat pouze za použití zdroje
+21V. Kontrolu karty lze pak provádět nejen podle sériového čísla, ale i
+podle bitového zdroje (lze tam uložit např. heslo)
+<p>To je vše, co jsem vám chtěl sdělit. Doufám, že jste se něčemu přiučili
+a pro zájemce připojuji schéma <a href="CTECKA.HTM"><font color="#FFFF00">jednoduché
+čtečky</font></a> pro PC se zdrojovým kódem programu v Pascalu.</p>
+<p align="center">&nbsp;</p>
+</body>
+
+</html>

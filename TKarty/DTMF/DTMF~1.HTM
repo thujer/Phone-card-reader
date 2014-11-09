@@ -1,0 +1,39 @@
+
+
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1250">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>Dekodér DTMF</TITLE>
+<META NAME="Template" CONTENT="C:\PROGRAM FILES\MICROSOFT OFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" BACKGROUND="Image19.jpg">
+
+<B><U><FONT SIZE=5><P ALIGN="CENTER">Dekodér DTMF</P>
+</U></FONT><P ALIGN="CENTER">© Frenky</P>
+</B><FONT FACE="Times New Roman"><P ALIGN="JUSTIFY">Jistě znáte princip dálkového ovládání telefonních záznamníků pomocí dialeru DTMF. Systém DTMF se dá využít i v komunikační technice, např. pro cílené volání u radiostanic atd.</P>
+<P ALIGN="JUSTIFY">K mikrofonu radiostanice se přiloží "pípák" a vyšle se patřičné číslo, které je na přijímací straně vyhodnoceno a podle jeho správnosti je řízena další činnost.</P>
+</FONT><P ALIGN="JUSTIFY">Na vyh<FONT FACE="Times New Roman">odnocení přijatého kódu se používá jednoúčelový integrovaný obvod, na jehož výstupu se objeví BCD kód přijatého čísla.</P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+<P>Schéma dekodéru DTMF je na následujícím obrázku:<FONT SIZE=2> </P>
+</FONT><P ALIGN="CENTER"><IMG SRC="DTMF.jpeg" WIDTH=488 HEIGHT=217></P>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY"> </P>
+<FONT FACE="Times New Roman"><P ALIGN="JUSTIFY">Na vstup označený jako "nf" přivádíme signál. Pokud přijímaný signál obsahuje dvojici tónů DTMF, objeví se jeho BCD kód na výstupech 11 až 14. Na výstupu 15 se objeví impuls, který tam setrvává po dobu trvání tónu.</P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+<FONT FACE="Times New Roman"><P ALIGN="JUSTIFY">Tento modul je navržen k propojení s počítačem ATARI 800. Modul se připojuje k joystickovému portu JOY1 (čísla v závorkách označují čísla jednotlivých pinů). Po propojení můžeme s pomocí vhodného softwaru využívat veškerý komfort, který počítač nabízí (např. dálkově ovládat různá zařízení radiostanicí nebo telefonem atd.)</P>
+</FONT><P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY">Uká<FONT FACE="Times New Roman">zkový program, který spolupracuje s tímto modulem se jmenuje SEL.BAS. Je to vlastně program selektivní volby pro radiostanici CB. Po "pípnutí" správného kódu začne počítač vydávat zvuk, který nás upozorní, že nás někdo volá.</P>
+</FONT><P ALIGN="JUSTIFY">Po stisku klávesy <B>Esc </B>se dostan<FONT FACE="Times New Roman">ete do konfiguračního menu, kde lze nastavit přístupový kód, rychlost čtení kódu (doporučuji 160) a hlasitost akustické signalizace čtecího cyklu.</P>
+<P ALIGN="JUSTIFY">Konfigurační parametry jsou uloženy v souboru KONFIG.sel .Jednotlivé kódy, které přicházejí na vstup, jsou uk</FONT>ládány do RAM-disku (D8:) do souboru SEL.DAT.</P>
+<B><P ALIGN="JUSTIFY"> </P>
+<FONT FACE="Times New Roman"><P ALIGN="CENTER">Po připojení modulu je vhodné nastavit na radiostanici maximální hlasitost!!</P>
+</FONT><P ALIGN="CENTER"> </P>
+</B><FONT FACE="Times New Roman"><P ALIGN="JUSTIFY">Program lze dále modifikovat například tak, že umožní vyhodnotit i několik kódů, a tím rozlišit kdo nás volá.</P>
+</FONT><B><P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY">Pozn.</B><FONT FACE="Times New Roman">: Přijaté číslo se čte v BASICu příkazem STICK (0). O disketu s ovládacím programem si můžete napsat na moji </FONT><A HREF="mailto:frenky@post.cz">adresu.</A></P>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="CENTER">Autor: <A HREF="index.htm">Frenky</A> ©1998</P></BODY>
+</HTML>
+<noscript>
+
